@@ -29,3 +29,10 @@ Route::post('/store_login', 'storeController@store_login');
 Route::get('/store_logout','storeController@store_logout');
 
 Route::post('/edit_store_name', 'storeController@edit_store_name');
+Route::get('/items','itemsController@index')->name('items');
+Route::post('/item_add','itemsController@item_add');
+
+Route::post('/item_delete','itemsController@item_delete');
+Route::post('/item_update_page','itemsController@item_update_page');
+Route::post('/item_update','itemsController@item_update');
+
