@@ -13,9 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 Route::get('/index','homeController@index')->name('index');
 Route::post('/login','loginController@login');
 Route::get('/logout','loginController@logout');
@@ -35,4 +32,7 @@ Route::post('/item_add','itemsController@item_add');
 Route::post('/item_delete','itemsController@item_delete');
 Route::post('/item_update_page','itemsController@item_update_page');
 Route::post('/item_update','itemsController@item_update');
+
+
+Route::get('/','frontPageController@index')->name('front_page');
 
