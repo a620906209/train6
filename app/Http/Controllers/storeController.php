@@ -16,6 +16,8 @@ class storeController extends Controller
         if(Session::get('store_id')){
             $items = Items::where('store_id','=',Session::get('store_id'))->get();
             return view('store_dashboard')->with('items',$items);
+        }else{
+            return view('store_dashboard');
         }
 
     }
@@ -40,6 +42,7 @@ class storeController extends Controller
     public function edit_store_name(Request $request){
         //更改店家名稱
         $store_name = Session::get('store_name');
+
         if(isset($store_name)){
         Store::where('store_name','=',$store_name)->update(['store_name'=>$request->store_name]);
         session()->put('store_name',$request->store_name);

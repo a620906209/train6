@@ -19,7 +19,6 @@ Route::get('/logout','loginController@logout');
 
 Route::get('/add_store_page','addStoreController@index');
 Route::post('/addstore','addStoreController@addstore');
-
 Route::post('/disable','loginController@disable');
 Route::get('/store','storeController@index')->name('store');
 Route::post('/store_login', 'storeController@store_login');
@@ -28,11 +27,11 @@ Route::get('/store_logout','storeController@store_logout');
 Route::post('/edit_store_name', 'storeController@edit_store_name');
 Route::get('/items','itemsController@index')->name('items');
 Route::post('/item_add','itemsController@item_add');
-
 Route::post('/item_delete','itemsController@item_delete');
 Route::post('/item_update_page','itemsController@item_update_page');
 Route::post('/item_update','itemsController@item_update');
 
 
 Route::get('/','frontPageController@index')->name('front_page');
-
+// Route::get('/cust','custController@index');
+Route::get('/order_page','orderController@index');

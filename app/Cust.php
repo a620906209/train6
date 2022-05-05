@@ -9,6 +9,6 @@ class Cust extends Model
     protected $table = "customer";
     protected  $primaryKey = 'cust_id';
     protected $fillable = [
-    'cust_id','cust_name','cust_birth','cust_tel','cust_postalcode','cust_address'
+    'cust_id','cust_acct','cust_pwd','cust_name','cust_birth','cust_tel','cust_postalcode','cust_address'
     ];
 }

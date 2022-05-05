@@ -12,8 +12,8 @@ class Items extends Model
     'item_id','itme_name','item_price','item_price','store_id'
     ];
 
-    public function store()
-    {
-        return $this->hasmany('App\Store');
-    }
+    // public function store()
+    // {
+    //     return $this->belongsto('App\Store','store_id');
+    // }
 }
