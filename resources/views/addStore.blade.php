@@ -1,6 +1,7 @@
 @extends('index')
 @section('content')
 <h6 style="color : red;">註冊店家</h6>
+
 <form action="/addstore" method="POST">
     @csrf
   <div class="form-group">

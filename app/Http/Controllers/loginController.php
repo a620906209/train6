@@ -30,9 +30,14 @@ class loginController extends Controller
     }
     public function disable(Request $request){
         $sql = Store::where('store_acct','=',$request->store_acct)->get();
+
         if(count($sql) > 0){
-            Store::where('store_acct','=',$request->store_acct)->update(['status'=>"啟用"]);
-            return view('login')->with('log','停用成功');
+            if($sql[0]['status'] == "停用"){
+                return view('login')->with('log','已經停用');
+            }else{
+                Store::where('store_acct','=',$request->store_acct)->update(['status'=>"停用"]);
+                return view('login')->with('log','停用成功');
+            }
         }else{
             return  view('login')->with('log','帳號不存在');
         }

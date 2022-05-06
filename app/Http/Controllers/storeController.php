@@ -23,14 +23,20 @@ class storeController extends Controller
     }
     public function store_login(Request $request){
         //店家登入
+
         $sql = Store::where('store_acct','=',$request->store_acct)->get();
+
         foreach($sql as $data);
         if(count($sql)>0){
-           if(Hash::check($request->store_pwd, $data['store_pwd'])){
-            session()->put('store_id',$data['store_id']);
-            session()->put('store_name',$data['store_name']);
-            return redirect()->route('store');
+            if($sql[0]['status'] == "停用"){
+                return view('store_dashboard')->with('log','帳號停用');
+            }elseif(Hash::check($request->store_pwd, $data['store_pwd'])){
+                session()->put('store_id',$data['store_id']);
+                session()->put('store_name',$data['store_name']);
+                return redirect()->route('store');
            }
+        }else{
+            return "帳號錯誤";
         }
     }
     public function store_logout(){

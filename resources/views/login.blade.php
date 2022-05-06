@@ -1,10 +1,13 @@
 @extends('index')
 @section('content')
+@if(isset($log))
+    <?php echo "<h4 style='color:red;'>".$log."</h4>";?>
+@endif
 @if(Session::get('sales_name'))
 
 <div class="container">
     @if(isset($log))
-        <?php echo $log; ?>
+        <?php echo "<h5 style='color:red;'>".$log."</h5>"; ?>
     @endif
   <form action="/logout" method = "GET">
   @csrf
@@ -23,7 +26,17 @@
   <form action="/disable" method="POST">
     @csrf
     <input type="text" name='store_acct' placeholder="店家帳號">
-    <button class="btn btn-outline-secondary">停用店家</button>
+    <button class="btn btn-outline-success">停用店家</button>
+  </form>
+  <form action="/" method="POST">
+    @csrf
+    <input type="text" name='store_acct' placeholder="店家帳號">
+    <button class="btn btn-outline-danger">刪除店家</button>
+  </form>
+  <form action="/" method="POST">
+    @csrf
+    <input type="text" name='store_acct' placeholder="店家帳號">
+    <button class="btn btn-outline-warning">恢復店家</button>
   </form>
 </div>
 @endif
