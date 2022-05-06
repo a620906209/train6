@@ -38,7 +38,7 @@
                 @csrf
             <div class="form-group">
                 <label for="">店家帳號</label>
-                <input type="" class="form-control" id="" aria-describedby="" placeholder="Sales Account" name="store_acct">
+                <input type="" class="form-control" id="" aria-describedby="" placeholder="Store Account" name="store_acct">
             </div>
             <div class="form-group">
                 <label for="exampleInputPassword1">店家密碼</label>

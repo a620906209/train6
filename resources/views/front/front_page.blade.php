@@ -2,6 +2,9 @@
 @section('content')
 <table class="table">
     <br>
+    @if(isset($log))
+    {{123}}
+    @endif
     <form action="/order_page" method = "GET">
         <thead>
         <tr>
@@ -15,12 +18,13 @@
             @if(isset($items))
             @foreach($items as $key => $item)
                     <tr>
-                        <input type="" name="item_id_{{$key}}" value="{{$item->item_id }}">
+                        <input type="hidden" name="" value="{{$item->item_id }}">
+                        <input type="hidden" name="" value="{{$item->store_id }}">
                         <td>{{$item->store_name }}</td>
                         <td>{{$item->item_name }}</td>
                         <td>NT.{{$item->item_price }}</td>
                         <td>
-                            <select name ="item_qty_{{$key}}">
+                            <select name ="{{$item->item_id}}">
                                 @for ($i=0;$i<=10;$i++)
                                     <option value="{{$i}}">{{$i}}</option>
                                 @endfor
@@ -32,8 +36,8 @@
         </tbody>
     </table>
     <div class="row align-items-end" style="float:right">
-        <div class="col-3">客戶編號<input class="form-control" type="text" name="cust_id" value="1"></div>
-        <div class="col-3">客戶名稱<input class="form-control" type="text" name="cust_name" value = "1"></div>
+        <div class="col-3">客戶編號<input class="form-control" type="text" name="cust_id" value="5"></div>
+        <div class="col-3">客戶名稱<input class="form-control" type="text" name="cust_name" value = "Hank"></div>
         <div class="col-3"><button type="submit" class="btn btn-primary" style="float:right"> 送出</button></div>
     </div>
     </form>
