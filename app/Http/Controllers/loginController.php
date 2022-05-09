@@ -86,40 +86,18 @@ class loginController extends Controller
             return  view('login')->with('log','帳號不存在');
         }
     }
-
-    public function sales_bonus(){
-        //計算業績獎金
-        $sales_id = Session::get('sales_id');
-        $sql = DB::table('Order_detail')
-        ->join('Items','Order_detail.item_id','=','Items.item_id')
-        ->join('Store','Items.store_id','=','Store.store_id')
-        ->join('Sales','Store.sales_id','=','Sales.sales_id')
-        ->where('sales.sales_id','=',$sales_id )
-        ->get();
-        $bonus = 0;
-        foreach($sql as $data){
-            $bonus = $data->detail_total +$bonus;
-        };
-        return floor($bonus*0.1);
+    public function destroy($id){
+        //刪除帳號
+        $sql = Store::find($id);
+        // dd($sql->deleted);
+        $sql -> deleted = 1;
+        $sql-> status = "停用";
+        $sql-> save();
+        return view('login');
     }
-    public function show_sales_total(){
-        //業務銷售
-        $sales_id = Session::get('sales_id');
-        $sql = DB::table('Order_detail')
-        ->join('Items','Order_detail.item_id','=','Items.item_id')
-        ->join('Store','Items.store_id','=','Store.store_id')
-        ->join('Sales','Store.sales_id','=','Sales.sales_id')
-        ->where('sales.sales_id','=',$sales_id )
-        ->groupby('Order_detail.item_id')
-        ->orderby('Order_detail.item_id','desc')
-        ->select('Items.item_name',DB::raw('SUM(qty) as total_qty'),'Order_detail.item_id')
-        ->get();
-
-        $product = new Product;
-        foreach($sql as $item)
-            $product -> item_name = $item->item_name;
-            $product -> qty = $item->total_qty;
-
-        return view('login')->with('product',$sql);
+    public function recovery($id){
+        $sql = Store::find($id);
+        return "恢復";
     }
+
 }

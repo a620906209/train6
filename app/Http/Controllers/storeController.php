@@ -75,6 +75,7 @@ class storeController extends Controller
         return view('store_list')->with('sql',$sql);
     }
     public function order_cust(){
+        //訂單
         $store_id = session::get('store_id');
         $sql = DB::table('Order_detail')
         ->join('Items','Order_detail.item_id','=','Items.item_id')
@@ -82,11 +83,11 @@ class storeController extends Controller
         ->join('Order','Order.order_id','=','Order_detail.order_id')
         ->where('Store.store_id','=',$store_id)
         ->get();
-        // dd($sql);
         return view('order_cust')->with('sql',$sql);
     }
 
     public function cust($id){
+        //查詢客戶
         $sql = Cust::find($id);
         return view('cust')->with('cust',$sql);
     }
