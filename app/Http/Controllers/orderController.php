@@ -49,6 +49,9 @@ class orderController extends Controller
                             $order_detail -> order_id = $order->order_id;
                             $order_detail -> qty = $qty;
                             $order_detail -> item_id = $key;
+                            $price = Items::where('item_id','=',$key)->get();
+                            foreach($price as $item);
+                            $order_detail -> detail_total = $qty * $item->item_price;
                             $order_detail ->save();
                         }
                     }

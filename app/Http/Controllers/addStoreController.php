@@ -33,7 +33,5 @@ class addStoreController extends Controller
         }else{
             return "帳號已註冊";
         }
-
-
     }
 }

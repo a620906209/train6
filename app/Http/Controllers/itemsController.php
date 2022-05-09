@@ -12,6 +12,7 @@ class itemsController extends Controller
         return view('items');
     }
     public function item_add(Request $request){
+                //商品新增
         if($request){
             $sql = Items::where('item_name','=',$request->item_name)->get()->count();
             if($sql == 0){

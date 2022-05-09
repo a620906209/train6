@@ -3,7 +3,7 @@
 <h6 style="color : red;">註冊店家</h6>
 
 <form action="/addstore" method="POST">
-    @csrf
+@csrf
   <div class="form-group">
     <label for="">店家帳號</label>
     <input type="" class="form-control" id="" aria-describedby="" placeholder="Store Account" name="store_acct">

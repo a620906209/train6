@@ -20,6 +20,7 @@ Route::get('/logout','loginController@logout');
 Route::get('/add_store_page','addStoreController@index');
 Route::post('/addstore','addStoreController@addstore');
 Route::post('/disable','loginController@disable');
+Route::post('/enable','loginController@enable');
 Route::get('/store','storeController@index')->name('store');
 Route::post('/store_login', 'storeController@store_login');
 Route::get('/store_logout','storeController@store_logout');
@@ -35,3 +36,8 @@ Route::post('/item_update','itemsController@item_update');
 Route::get('/','frontPageController@index')->name('front_page');
 // Route::get('/cust','custController@index');
 Route::get('/order_page','orderController@index');
+
+Route::get('/sales_bonus', 'loginController@sales_bonus');
+Route::get('/show_store', 'storeController@show_store');
+Route::get('/order_cust', 'storeController@order_cust');
+Route::get('cust/{id}', 'storeController@cust');

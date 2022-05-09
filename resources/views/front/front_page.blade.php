@@ -3,7 +3,7 @@
 <table class="table">
     <br>
     @if(isset($log))
-    {{123}}
+
     @endif
     <form action="/order_page" method = "GET">
         <thead>
@@ -19,7 +19,7 @@
             @foreach($items as $key => $item)
                     <tr>
                         <input type="hidden" name="" value="{{$item->item_id }}">
-                        <input type="hidden" name="" value="{{$item->store_id }}">
+                        <input type="hidden" name="" value="{{$item->status }}">
                         <td>{{$item->store_name }}</td>
                         <td>{{$item->item_name }}</td>
                         <td>NT.{{$item->item_price }}</td>
