@@ -28,7 +28,9 @@ class storeController extends Controller
     }
     public function store_login(Request $request){
         //店家登入
-        $sql = Store::where('store_acct','=',$request->store_acct)->get();
+        $sql = Store::where('store_acct','=',$request->store_acct)
+        ->where('deleted','=',0)
+        ->get();
         foreach($sql as $data);
         if(count($sql)>0){
             if($sql[0]['status'] == "停用"){
@@ -38,22 +40,22 @@ class storeController extends Controller
                 session()->put('store_name',$data['store_name']);
                 return redirect()->route('store');
            }else{
-               return "密碼錯誤";
+               return view('store_dashboard')->with('log','密碼錯誤');
            }
         }else{
-            return "帳號錯誤";
+            return view('store_dashboard')->with('log','帳號錯誤');
         }
     }
     public function store_logout(){
         //店家登出
         Session::pull('store_id');
+        Session::pull('store_name');
         return view('store_dashboard');
     }
 
     public function edit_store_name(Request $request){
         //更改店家名稱
         $store_name = Session::get('store_name');
-
         if(isset($store_name)){
         Store::where('store_name','=',$store_name)->update(['store_name'=>$request->store_name]);
         session()->put('store_name',$request->store_name);
@@ -71,7 +73,6 @@ class storeController extends Controller
         ->where('Store.store_id','=',$store_id)
         ->select('item_name',DB::raw('SUM(qty) as total_qty'))
         ->get();
-
         return view('store_list')->with('sql',$sql);
     }
     public function order_cust(){

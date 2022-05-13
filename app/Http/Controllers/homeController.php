@@ -13,7 +13,7 @@ use DB;
 class homeController extends Controller
 {
     function index(){
-        if(session::get('sale_name')){
+        if(session::get('sales_name')){
         //顯示銷售狀況
         $sales_id = Session::get('sales_id');
         $sql = DB::table('Order_detail')
@@ -36,7 +36,6 @@ class homeController extends Controller
         foreach($sql_bonus as $data){
             $bonus = $data->detail_total +$bonus;
         };
-
         return view('login')->with('product',$sql)->with('bonus',floor($bonus*0.1));
     }else{
         return view('login');

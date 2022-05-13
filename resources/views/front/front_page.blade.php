@@ -1,10 +1,26 @@
 @extends('front.main')
 @section('content')
 <table class="table">
-    <br>
-    @if(isset($log))
-
-    @endif
+<br>
+@if(isset($_GET['log']))
+<h5 style='color:red;'>{{$_GET['log']}}</h5>
+@endif
+@if(Session::get('cust_id'))
+    <form action="/cust_logout" method = "GET">
+        @csrf
+        <div class= "col">
+            <button class="btn btn-outline-danger">登出</button>
+        </div>
+    </form>
+@else
+    <a class='btn btn-primary' href="/cust">登入</a>
+@endif
+@if(Session::get('cust_name') != NULL)
+<div class= row>
+    <h5 class='col-1'>你好</h5>
+    <h5 class='col'>{{Session::get('cust_name')}}</h5>
+</div>
+@endif
     <form action="/order_page" method = "GET">
         <thead>
         <tr>
@@ -35,10 +51,10 @@
             @endif
         </tbody>
     </table>
-    <div class="row align-items-end" style="float:right">
-        <div class="col-3">客戶編號<input class="form-control" type="text" name="cust_id" value="5"></div>
-        <div class="col-3">客戶名稱<input class="form-control" type="text" name="cust_name" value = "Hank"></div>
-        <div class="col-3"><button type="submit" class="btn btn-primary" style="float:right"> 送出</button></div>
+    <div class="row align-items-end" >
+        <div class="col"> <input class="form-control" type="hidden" name="cust_id" value={{Session::get('cust_id')}}></div>
+        {{-- <div class="col-3">客戶名稱<input class="form-control" type="text" name="cust_name" ></div> --}}
+        <div class="col"><button type="submit" class="btn btn-primary" style="float:right"> 送出</button></div>
     </div>
     </form>
 

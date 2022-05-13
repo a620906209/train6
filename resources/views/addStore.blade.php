@@ -1,4 +1,4 @@
-@extends('index')
+@extends('sale_index')
 @section('content')
 <h6 style="color : red;">註冊店家</h6>
 

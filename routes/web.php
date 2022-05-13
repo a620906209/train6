@@ -16,7 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/index','homeController@index')->name('index');
 Route::post('/login','loginController@login');
 Route::get('/logout','loginController@logout');
-Route::get('delete/{id}','loginController@destroy');
+Route::post('delete','loginController@delete');
+Route::post('recovery', 'loginController@recovery');
 
 Route::get('/add_store_page','addStoreController@index');
 Route::post('/addstore','addStoreController@addstore');
@@ -36,11 +37,17 @@ Route::post('/item_update','itemsController@item_update');
 
 
 Route::get('/','frontPageController@index')->name('front_page');
-Route::get('/order_page','orderController@index');
+Route::get('/order_page','orderController@order');
 
 Route::get('/sales_bonus', 'loginController@sales_bonus');
 Route::get('/show_store', 'storeController@show_store');
 Route::get('/order_cust', 'storeController@order_cust');
 Route::get('cust/{id}', 'storeController@cust');
+
+
+Route::get('cust', 'custController@index');
+Route::post('cust_login','custController@cust_login');
+Route::get('cust_logout','custController@cust_logout');
+
 
 

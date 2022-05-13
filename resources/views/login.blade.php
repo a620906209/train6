@@ -1,6 +1,9 @@
-@extends('index')
+@extends('sale_index')
 @section('content')
 <div class="row">
+@if(isset($log))
+    <?php echo "<h6 style='color:red;'>".$log."</h6>";?>
+@endif
 @if(Session::get('sales_name'))
     <div class="col-4">
             @if(isset($log))
@@ -30,12 +33,12 @@
             <input type="text" name='store_acct' placeholder="店家帳號">
             <button class="btn btn-outline-success">重啟店家</button>
         </form>
-        <form action="/" method="POST">
+        <form action="/delete" method = 'POST'>
             @csrf
             <input type="text" name='store_acct' placeholder="店家帳號">
             <button class="btn btn-outline-danger">刪除店家</button>
         </form>
-        <form action="/" method="POST">
+        <form action="/recovery" method='POST'>
             @csrf
             <input type="text" name='store_acct' placeholder="店家帳號">
             <button class="btn btn-outline-warning">恢復店家</button>

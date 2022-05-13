@@ -1,7 +1,7 @@
 @extends('index')
 @section('content')
 @if(isset($log))
-<?php echo "<h6 style='color:red;'>".$log."</h6>";?>
+<?php echo "<h7 style='color:red;'>".$log."</h7>";?>
 @endif
 <br>
 <div class="row">

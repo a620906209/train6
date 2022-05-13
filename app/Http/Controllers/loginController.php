@@ -43,23 +43,24 @@ class loginController extends Controller
                 foreach($sql_bonus as $data){
                     $bonus = $data->detail_total +$bonus;
                 };
-
                 return view('login')->with('product',$sql)->with('bonus',floor($bonus*0.1));
             }else{
-                return "密碼錯誤";
+                return view('login')->with('log',"密碼錯誤");
             }
         }else{
-            return "帳號錯誤";
+            return view('login')->with('log',"帳號有誤");
         }
     }
     public function logout(){
         //登出業務帳號
         Session::pull('sales_name');
+        Session::pull('sales_id');
         return view('login');
     }
     public function disable(Request $request){
         //停用店家帳號
-        $sql = Store::where('store_acct','=',$request->store_acct)->get();
+        $sales_id = Session::get('sales_id');
+        $sql = Store::where('store_acct','=',$request->store_acct)->where('sales_id','=',$sales_id)->get();
 
         if(count($sql) > 0){
             if($sql[0]['status'] == "停用"){
@@ -74,7 +75,8 @@ class loginController extends Controller
     }
     public function enable(Request $request){
         //啟用店家帳號
-        $sql = Store::where('store_acct','=',$request->store_acct)->get();
+        $sales_id = Session::get('sales_id');
+        $sql = Store::where('store_acct','=',$request->store_acct)->where('sales_id','=',$sales_id)->get();
         if(count($sql) > 0){
             if($sql[0]['status'] == "啟用"){
                 return view('login')->with('log','已經啟用');
@@ -86,18 +88,34 @@ class loginController extends Controller
             return  view('login')->with('log','帳號不存在');
         }
     }
-    public function destroy($id){
+    public function delete(Request $request){
         //刪除帳號
-        $sql = Store::find($id);
-        // dd($sql->deleted);
-        $sql -> deleted = 1;
-        $sql-> status = "停用";
-        $sql-> save();
-        return view('login');
+        $store_acct =$request ->store_acct;
+        $sales_id = Session::get('sales_id');
+        $sql = Store::where('store_acct','=',$store_acct)->where('sales_id','=',$sales_id)->first();
+        if($sql){
+            $sql -> deleted = 1;
+            $sql-> status = "停用";
+            $sql-> save();
+            return view('login')->with('log','停用成功');
+        }else{
+            return view('login')->with('log','停用失敗');
+        }
     }
-    public function recovery($id){
-        $sql = Store::find($id);
-        return "恢復";
+    public function recovery(Request $request){
+        //刪除回復
+        $store_acct =$request ->store_acct;
+        $sales_id = Session::get('sales_id');
+        $sql = Store::where('store_acct','=',$store_acct)->where('sales_id','=',$sales_id)->first();
+        if($sql){
+            $sql-> status = "啟用";
+            $sql->deleted = 0;
+            $sql ->save();
+            return view('login')->with('log','恢復成功');
+        }else{
+            view('login')->with('log','恢復失敗');
+        }
+
     }
 
 }

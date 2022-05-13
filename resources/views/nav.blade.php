@@ -5,9 +5,9 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
-        @if(Session::get('store_id') == NULL)
+        {{-- @if(Session::get('store_id') == NULL)
             <a class="nav-item nav-link active" href="/store">店家登入</a>
-        @endif
+        @endif --}}
       <!-- <a class="nav-item nav-link active" href="#">Features</a> -->
     </div>
   </div>

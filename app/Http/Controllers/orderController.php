@@ -11,7 +11,8 @@ use App\Cust;
 
 class orderController extends Controller
 {
-    public function index(Request $request){
+    public function order(Request $request){
+        // dd($request->cust_id);
         $cust_id = $request['cust_id'];
         $check_cust = Cust::where('cust_id','=',$cust_id)->count();
         if($check_cust){
@@ -55,10 +56,12 @@ class orderController extends Controller
                             $order_detail ->save();
                         }
                     }
+                }else{
+                    return redirect()->route('front_page',['log' => '訂購失敗']);
                 }
-                return redirect()->route('front_page');
+                return redirect()->route('front_page',['log' => '訂購成功']);
             }else{
-                return redirect()->route('front_page');
+                return redirect()->route('front_page',['log' => '請登入']);
             }
 
 
