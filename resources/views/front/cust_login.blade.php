@@ -11,18 +11,17 @@
         </div>
     </form>
 @endif
-{{-- <h9>{{Session::get('cust_id')}}</h9> --}}
 @if(Session::get('cust_id') == NULL)
     <div class="row">
         <form action="/cust_login" method="POST">
             @csrf
         <div class="form-group">
             <label for="">客戶帳號</label>
-            <input type="" class="form-control" id="" aria-describedby="" placeholder="Cust Account" name="cust_acct">
+            <input type="" class="form-control" id="" aria-describedby="" placeholder="Cust Account" name="user_id">
         </div>
             <div class="form-group">
                 <label for="exampleInputPassword1">客戶密碼</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="cust_pwd">
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="tel">
             </div>
         <div class="form-group form-check">
             </div>

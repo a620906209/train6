@@ -1,9 +1,9 @@
 @extends('sale_index')
 @section('content')
 <div class="row">
-@if(isset($log))
+{{-- @if(isset($log))
     <?php echo "<h6 style='color:red;'>".$log."</h6>";?>
-@endif
+@endif --}}
 @if(Session::get('sales_name'))
     <div class="col-4">
             @if(isset($log))

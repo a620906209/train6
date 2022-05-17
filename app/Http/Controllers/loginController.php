@@ -107,13 +107,14 @@ class loginController extends Controller
         $store_acct =$request ->store_acct;
         $sales_id = Session::get('sales_id');
         $sql = Store::where('store_acct','=',$store_acct)->where('sales_id','=',$sales_id)->first();
-        if($sql){
+        // dd($sql);
+        if($sql != null){
             $sql-> status = "啟用";
             $sql->deleted = 0;
             $sql ->save();
             return view('login')->with('log','恢復成功');
         }else{
-            view('login')->with('log','恢復失敗');
+            return view('login')->with('log','恢復失敗');
         }
 
     }

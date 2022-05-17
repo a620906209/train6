@@ -55,11 +55,14 @@ class storeController extends Controller
 
     public function edit_store_name(Request $request){
         //更改店家名稱
+        // dd($request);
         $store_name = Session::get('store_name');
-        if(isset($store_name)){
-        Store::where('store_name','=',$store_name)->update(['store_name'=>$request->store_name]);
-        session()->put('store_name',$request->store_name);
-        return redirect()->route('store');
+        if($request->store_name != null){
+            Store::where('store_name','=',$store_name)->update(['store_name'=>$request->store_name]);
+            session()->put('store_name',$request->store_name);
+            return redirect()->route('store')->with('log','更新成功');
+        }else{
+            return view('store_dashboard')->with('log','名稱錯誤');
         }
     }
 
@@ -83,6 +86,8 @@ class storeController extends Controller
         ->join('Store','Items.store_id','=','Store.store_id')
         ->join('Order','Order.order_id','=','Order_detail.order_id')
         ->where('Store.store_id','=',$store_id)
+        // ->groupby('cust_id')
+        // ->select('item_name',DB::raw('SUM(qty) as total_qty'),'cust_id')
         ->get();
         return view('order_cust')->with('sql',$sql);
     }

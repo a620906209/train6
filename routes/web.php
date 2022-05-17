@@ -37,6 +37,7 @@ Route::post('/item_update','itemsController@item_update');
 
 
 Route::get('/','frontPageController@index')->name('front_page');
+Route::get('/show/{id}', 'frontPageController@show');
 Route::get('/order_page','orderController@order');
 
 Route::get('/sales_bonus', 'loginController@sales_bonus');

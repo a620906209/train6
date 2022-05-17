@@ -5,6 +5,7 @@
 @if(isset($_GET['log']))
 <h5 style='color:red;'>{{$_GET['log']}}</h5>
 @endif
+{{-- <a class="btn btn-primary" href="http://localhost/hank/myproject">註冊</a> --}}
 @if(Session::get('cust_id'))
     <form action="/cust_logout" method = "GET">
         @csrf
@@ -34,6 +35,7 @@
             @if(isset($items))
             @foreach($items as $key => $item)
                     <tr>
+                        <input type="hidden" name="" value="{{$item->store_id }}">
                         <input type="hidden" name="" value="{{$item->item_id }}">
                         <input type="hidden" name="" value="{{$item->status }}">
                         <td>{{$item->store_name }}</td>

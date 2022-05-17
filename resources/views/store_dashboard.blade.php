@@ -52,7 +52,7 @@
     <div class="container">
     @if(isset($items))
     <a class="btn btn-primary" href="/show_store">商品銷售狀況</a>
-    <a class="btn btn-primary" href="/order_cust">商品明細</a>
+    <a class="btn btn-primary" href="/order_cust">商品銷售明細</a>
     <hr>
     <ul class="list-group list-group-horizontal-lg">
         <li class="list-group-item list-group-item-action active">商品名稱</li>

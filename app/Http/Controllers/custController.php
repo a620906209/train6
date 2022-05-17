@@ -16,18 +16,16 @@ class custController extends Controller
 
     public function cust_login(Request $request){
         //客戶登入
-        $sql_count = Cust::where('cust_acct','=',$request->cust_acct)->count();
-        $sql = Cust::where('cust_acct','=',$request->cust_acct)->get();
-        foreach($sql as $data);
+        $sql_count = Cust::where('user_id','=',$request->user_id)
+        ->where('tel','=',$request->tel)
+        ->count();
+            if($sql_count == 1){
+                $sql = Cust::where('user_id','=',$request->user_id)->get();
+                foreach($sql as $data);
 
-            if(count($sql)>=1){
-                if(Hash::check($request->cust_pwd,$data['cust_pwd'])){
-                    session()->put('cust_id',$data['cust_id']);
-                    session()->put('cust_name',$data['name']);
-                    return redirect()->route('front_page');
-                }else{
-                    return view('front.cust_login')->with('log','密碼錯誤');
-                }
+                session()->put('cust_id',$data['cust_id']);
+                session()->put('cust_name',$data['name']);
+                return redirect()->route('front_page');
             }else{
                 return view('front.cust_login')->with('log','登入錯誤');
             }
